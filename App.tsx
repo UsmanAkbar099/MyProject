@@ -9,10 +9,9 @@ import {
 } from 'react-native';
 
 export default function App() {
-  const fadeAnim = useRef(new Animated.Value(0)).current; // Fade-in animation
-  const buttonScale = useRef(new Animated.Value(1)).current; // Button scale animation
+  const fadeAnim = useRef(new Animated.Value(0)).current; 
+  const buttonScale = useRef(new Animated.Value(1)).current; 
 
-  // State for username and password
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -84,7 +83,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   input: {
-    width: '70%',
+    width: '75%',
     height: 60,
     backgroundColor: '#fff',
     borderRadius: 10,
