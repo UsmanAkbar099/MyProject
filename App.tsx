@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
-  View,
   TextInput,
   TouchableOpacity,
   Animated,
