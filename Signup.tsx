@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker'; 
 
+
+
 const Signup = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');

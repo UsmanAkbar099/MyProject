@@ -1,36 +1,29 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { Font } from './Font';
 
-const MyScreen = () => {
+const FirstScreen = ({ navigation } : {navigation:any}) => {
 
-  // Handle button press
   const handlePress = () => {
-    
+    navigation.navigate('LoginScreen');  
   };
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Gets things with TODs</Text>
-      <Text style={styles.text}>
-        Lorem ipsum dolor sit amet {'\n'}
-        consectetur. Eget sit nec et {'\n'}
-        euismod. Consequat urna {'\n'}
-        quam felis interdum quisque. {'\n'}
-        Malesuada adipiscing tristique {'\n'}
-        ut eget sed.
+      <Text style={styles.text}>Lorem ipsum dolor sit amet {'\n'} consectetur. Eget sit nec et {'\n'}euismod. Consequat urna {'\n'}quam felis interdum quisque. {'\n'}Malesuada adipiscing tristique {'\n'}ut eget sed.
       </Text>
 
-      {/* Custom Button */}
+      
       <TouchableOpacity style={styles.customButton} onPress={handlePress}>
         <Text style={styles.buttonText}>Get Started</Text>
       </TouchableOpacity>
 
-      {/* Two intersecting circles */}
+      
       <View style={styles.circleContainer}>
-        <View style={[styles.circle, {top: 30, left: -50}]} />  {/* Circle from the top-left */}
-        <View style={[styles.circle, {top: -35, left: -10}]} />  {/* Circle from the left side */}
+        <View style={[styles.circle, {top: -5, left: -50}]} />  
+        <View style={[styles.circle, {top:-85, left: 40}]} />  
 
-        {/* Adding an Image on top of the circles */}
+        
         <Image 
           source={require('./assets/undraw_done_checking_re_6vyx 1.png')}  // Make sure the image is in the assets folder
           style={styles.imageStyle} 
@@ -49,19 +42,19 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     marginTop: 250,
     marginBottom: 15,
     textAlign: 'center',
-    fontFamily: 'Poppins',
+    fontFamily: "Poppins-Regular",
     lineHeight: 20.41,
   },
   text: {
     fontSize: 18,
     marginTop: 10,
     textAlign: 'center',
-    fontFamily: 'Poppins',
+    fontFamily: 'Poppins-Regular',
     fontWeight: '400',
     lineHeight: 20.41,
     width: '90%',
@@ -96,7 +89,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 100,
-    backgroundColor: '#a2e1e8',
+    backgroundColor: 'rgba(162, 225, 232, 0.5)', // Adjusted to semi-transparent
     position: 'absolute',
   },
   imageStyle: {
@@ -111,4 +104,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default MyScreen;
+export default FirstScreen;
