@@ -24,7 +24,7 @@ const DashBoard = () => {
     
       <View style={styles.topFrame}>
         <Image 
-          source={require('./assets/Ellipse 3.png')} // Replace with your image path
+          source={require('./assets/Ellipse 3.png')} 
           style={styles.imageStyle} 
         />
         <Text style={styles.welcomeText}>Welcome Jeegar Goyani</Text>
@@ -40,7 +40,7 @@ const DashBoard = () => {
       <View style={styles.bottomFrame}>
         <Text style={styles.afternoonText}>Good Afternoon</Text>
         <Image 
-          source={require('./assets/clock.png')} // Replace with your image path
+          source={require('./assets/clock.png')} 
           style={styles.bottomImageStyle} 
         />
         <Text style={styles.afternoonTexts}>Task List</Text>
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 100,
-    backgroundColor: 'rgba(162, 225, 232, 0.5)', // Adjusted to semi-transparent
+    backgroundColor: 'rgba(162, 225, 232, 0.5)',
     position: 'absolute',
   },
   additionalFrame: {

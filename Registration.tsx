@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 100,
-    backgroundColor: 'rgba(162, 225, 232, 0.5)', // Adjusted to semi-transparent
+    backgroundColor: 'rgba(162, 225, 232, 0.5)', 
     position: 'absolute',
   },
 });

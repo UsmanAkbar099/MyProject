@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { Font } from './Font';
 
 const FirstScreen = ({ navigation } : {navigation:any}) => {
 
@@ -9,7 +8,7 @@ const FirstScreen = ({ navigation } : {navigation:any}) => {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Gets things with TODs</Text>
+      <Text style={styles.title}>Gets Things with TODs</Text>
       <Text style={styles.text}>Lorem ipsum dolor sit amet {'\n'} consectetur. Eget sit nec et {'\n'}euismod. Consequat urna {'\n'}quam felis interdum quisque. {'\n'}Malesuada adipiscing tristique {'\n'}ut eget sed.
       </Text>
 
@@ -25,7 +24,7 @@ const FirstScreen = ({ navigation } : {navigation:any}) => {
 
         
         <Image 
-          source={require('./assets/undraw_done_checking_re_6vyx 1.png')}  // Make sure the image is in the assets folder
+          source={require('./assets/undraw_done_checking_re_6vyx 1.png')}  
           style={styles.imageStyle} 
         />
       </View>
@@ -89,17 +88,17 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 100,
-    backgroundColor: 'rgba(162, 225, 232, 0.5)', // Adjusted to semi-transparent
+    backgroundColor: 'rgba(162, 225, 232, 0.5)', 
     position: 'absolute',
   },
   imageStyle: {
     
     position: 'absolute',
-    top: '90%',  // Position the image within the container
+    top: '90%',  
     left: '30%',
-    width: 254,  // Adjust image size
-    height: 194,  // Adjust image size
-    resizeMode: 'contain',  // Ensure the image fits within the space
+    width: 254,  
+    height: 194,  
+    resizeMode: 'contain',  
   },
   
 });

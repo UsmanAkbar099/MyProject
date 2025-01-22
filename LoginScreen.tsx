@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   formContainer: {
-    marginTop: 480,  // Adjust to position the form below the image
+    marginTop: 480,  
     alignItems: 'center',
     width: '100%',
   },
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 100,
-    backgroundColor: 'rgba(162, 225, 232, 0.5)', // Adjusted to semi-transparent
+    backgroundColor: 'rgba(162, 225, 232, 0.5)', 
     position: 'absolute',
   },
   imageStyle: {
