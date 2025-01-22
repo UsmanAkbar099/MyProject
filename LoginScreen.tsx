@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image, Alert } from 'react-native';
 
 const Login = ({ navigation }: {navigation:any}) => {
-  const [fullName, setFullName] = useState('');
+  const [fullName, setFullName] = useState<string>('');
   const [email, setEmail] = useState('');
 
   const handleSignin=()=>{
@@ -19,6 +19,11 @@ const Login = ({ navigation }: {navigation:any}) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailRegex.test(email)) {
       Alert.alert('Invalid Email', 'Please enter a valid email address');
+      return;
+    }
+    const nameRegex = /^[A-Z][a-z]+(?: [A-Z][a-z]+)*$/;
+    if (!nameRegex.test(fullName)) {
+      Alert.alert('Invalid Name Style', 'Please enter a valid Name ');
       return;
     }
 
