@@ -23,7 +23,7 @@ const Login = ({ navigation }: {navigation:any}) => {
     }
     const nameRegex = /^[A-Z][a-z]+(?: [A-Z][a-z]+)*$/;
     if (!nameRegex.test(fullName)) {
-      Alert.alert('Invalid Name Style', 'Please enter a valid Name ');
+      Alert.alert('Invalid Name Style', 'Please enter a valid Name Style ');
       return;
     }
 
