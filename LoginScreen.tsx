@@ -32,7 +32,7 @@ const Login = ({ navigation }: {navigation:any}) => {
 
       <View style={styles.circleContainer}>
         <View style={[styles.circle, { top: -5, left: -50 }]} />
-        <View style={[styles.circle, { top: -85, left:40 }]} />
+        <View style={[styles.circle, { top: -85, left:45 }]} />
         <Image
           source={require('./assets/undraw_back_to_school_inwc 1.png')}  
           style={styles.imageStyle}
