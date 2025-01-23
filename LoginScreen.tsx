@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   formContainer: {
-    marginTop: 480,
+    marginTop: '130%',
     alignItems: 'center',
     width: '100%',
   },
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     color: '#a2e1e8',
     fontSize: 15,
     fontFamily: 'Poppins-Regular',
-    marginTop: 40,
+    marginTop: 20,
   },
   input: {
     width: '90%',
@@ -138,13 +138,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   customButton: {
-    width: 380,
+    width: '95%',
     height: 60,
     backgroundColor: '#32a2a8',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    marginTop: 100,
+    marginTop: '25%',
   },
   buttonText: {
     color: 'white',
@@ -173,8 +173,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   circle: {
-    width: 200,
-    height: 200,
+    width: '65%',
+    height: '70%',
     borderRadius: 100,
     backgroundColor: 'rgba(162, 225, 232, 0.5)',
     position: 'absolute',
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    marginTop: 200,
+    marginTop: '53%',
     marginBottom: -300,
     textAlign: 'center',
     fontFamily: 'Poppins-Bold',

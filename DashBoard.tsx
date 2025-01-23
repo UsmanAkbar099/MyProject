@@ -72,11 +72,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageStyle: {
-    width: 100,
-    height: 100,
+    width: '25%',
+    height: '28%',
     borderRadius: 75,
     marginBottom: 10,
-    marginTop: 190,
+    marginTop: '50%',
   },
   welcomeText: {
     fontSize: 18,
@@ -108,14 +108,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   bottomImageStyle: {
-    width: 150,
-    height: 150,
+    width: '45%',
+    height: '25%',
     alignSelf: 'center',
     marginTop: 10,
     resizeMode: 'contain',
   },
   bottomImageStyles: {
-    width: 350,
+    width: '100%',
+    marginBottom:10,
   },
   circleContainer: {
     position: 'absolute',
@@ -128,8 +129,8 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   circle: {
-    width: 200,
-    height: 200,
+    width: '65%',
+    height: '70%',
     borderRadius: 100,
     backgroundColor: 'rgba(162, 225, 232, 0.5)',
     position: 'absolute',

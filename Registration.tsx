@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontFamily: 'Poppins-Bold',
     marginBottom: 20,
-    marginTop: 250,
+    marginTop: '55%',
     textAlign: 'center',
   },
   centeredTextContainer: {
@@ -197,14 +197,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   customButton: {
-    width: 380,
+    width: '95%',
     height: 60,
     backgroundColor: '#32a2a8',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
     marginBottom: 10,
-    marginTop: 70,
+    marginTop: '20%',
   },
   buttonText: {
     color: 'white',
@@ -232,9 +232,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  circle: {
-    width: 200,
-    height: 200,
+  circle: { 
+    width: '65%',
+    height: '70%',
     borderRadius: 100,
     backgroundColor: 'rgba(162, 225, 232, 0.5)',
     position: 'absolute',
