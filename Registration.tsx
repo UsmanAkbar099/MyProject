@@ -1,86 +1,146 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, Alert } from 'react-native';
+import { View,Image, Text, TouchableOpacity, TextInput, StyleSheet, Modal } from 'react-native';
 
-const Registration = ({ navigation } : {navigation:any}) => {
-  
+const Registration = ({ navigation }: { navigation: any }) => {
   const [fullName, setFullName] = useState<string>('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [fullNameError, setFullNameError] = useState<string>('');
+  const [emailError, setEmailError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState<string>('');
+  const [showPopup, setShowPopup] = useState<boolean>(false);
 
-  const handleSignUp=()=>{
+  const handleSignUp = () => {
     navigation.navigate('LoginScreen');
-  }
+  };
+
   const handlePress = () => {
-    
-    if (!fullName || !email || !password || !confirmPassword) {
-      Alert.alert('Please fill out all fields');
-    } else if (password !== confirmPassword) {
-      Alert.alert('Passwords do not match');
+    let valid = true;
+
+    const nameRegex = /^[A-Z][a-z]+(?: [A-Z][a-z]+)*$/;
+    if (!nameRegex.test(fullName)) {
+      setFullNameError('Please enter a valid Name Style');
+      valid = false;
     } else {
-      
-      Alert.alert('Registration successful!');
-      navigation.navigate('LoginScreen');
+      setFullNameError('');
     }
-    
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      setEmailError('Please enter a valid email address');
+      valid = false;
+    } else {
+      setEmailError('');
+    }
+
+    if (password.length < 6) {
+      setPasswordError('Password must be at least 6 characters');
+      valid = false;
+    } else {
+      setPasswordError('');
+    }
+
+    if (password !== confirmPassword) {
+      setConfirmPasswordError('Passwords do not match');
+      valid = false;
+    } else {
+      setConfirmPasswordError('');
+    }
+
+    if (valid) {
+      setShowPopup(true);
+      setTimeout(() => {
+        setShowPopup(false);
+        navigation.navigate('LoginScreen');
+      }, 2500); 
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Onboard! </Text>
-      <Text style={styles.titles}>Let’s help to meet up your{'\n'} tasks. </Text>
-      
-      
+      <View style={styles.circleContainer}>
+        <View style={[styles.circle, { top: -5, left: -50 }]} />
+        <View style={[styles.circle, { top: -85, left: 45 }]} />
+      </View>
 
-    
+      <Text style={styles.title}>{"Welcome to Onboard!"}</Text>
+      <View style={styles.centeredTextContainer}>
+        <Text style={styles.titles}>{"Let’s help to meet up your \n tasks."}</Text>
+      </View>
+
       <TextInput
-        style={styles.input}
+        style={[styles.input, fullNameError ? { borderColor: 'red', borderWidth: 1 } : {}]}
         placeholder="Enter Full Name"
         value={fullName}
-        onChangeText={setFullName}
+        onChangeText={(text) => {
+          setFullName(text);
+          setFullNameError('');
+        }}
       />
+      {fullNameError ? <Text style={styles.errorText}>{fullNameError}</Text> : null}
 
-    
       <TextInput
-        style={styles.input}
+        style={[styles.input, emailError ? { borderColor: 'red', borderWidth: 1 } : {}]}
         placeholder="Enter Email"
         value={email}
-        onChangeText={setEmail}
+        onChangeText={(text) => {
+          setEmail(text);
+          setEmailError('');
+        }}
         keyboardType="email-address"
       />
+      {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
 
-      
       <TextInput
-        style={styles.input}
+        style={[styles.input, passwordError ? { borderColor: 'red', borderWidth: 1 } : {}]}
         placeholder="Enter Password"
         value={password}
-        onChangeText={setPassword}
+        onChangeText={(text) => {
+          setPassword(text);
+          setPasswordError('');
+        }}
         secureTextEntry
       />
+      {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
 
-      
       <TextInput
-        style={styles.input}
+        style={[styles.input, confirmPasswordError ? { borderColor: 'red', borderWidth: 1 } : {}]}
         placeholder="Confirm Password"
         value={confirmPassword}
-        onChangeText={setConfirmPassword}
+        onChangeText={(text) => {
+          setConfirmPassword(text);
+          setConfirmPasswordError('');
+        }}
         secureTextEntry
       />
-
+      {confirmPasswordError ? <Text style={styles.errorText}>{confirmPasswordError}</Text> : null}
 
       <TouchableOpacity style={styles.customButton} onPress={handlePress}>
-        <Text style={styles.buttonText}>Register</Text>
+        <Text style={styles.buttonText}>{"Register"}</Text>
       </TouchableOpacity>
 
-    
       <Text style={styles.alreadyText}>
-        Already have an account? <TouchableOpacity onPress={handleSignUp}><Text style={styles.signInText}>Sign In</Text></TouchableOpacity>
+        {"Already have an account? "}
+        <TouchableOpacity onPress={handleSignUp}>
+          <Text style={styles.signInText}>{"Sign In"}</Text>
+        </TouchableOpacity>
       </Text>
 
-      <View style={styles.circleContainer}>
-        <View style={[styles.circle, { top: -5, left: -50 }]} />  
-        <View style={[styles.circle, { top: -85, left: 45}]} />  
-      </View>
+      {showPopup && (
+        <Modal transparent animationType="fade">
+          <View style={styles.popupContainer}>
+            <View style={styles.popup}>
+              <Image
+                source={require('./assets/Tick.jpg')}
+                style={styles.imageStyle}
+              />
+              <Text style={styles.popupText}>{"Registration Successful!"}</Text>
+            </View>
+          </View>
+        </Modal>
+      )}
     </View>
   );
 };
@@ -93,34 +153,49 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F4F3',
     padding: 20,
   },
-
+  imageStyle: {
+    width: 100, 
+    height: 100,
+    resizeMode: 'contain',
+    marginBottom: 10, 
+  },
   title: {
-    fontSize: 28,
-    fontFamily: "Poppins-Regular",
-    fontWeight: 'bold',
+    fontSize: 25,
+    fontFamily: 'Poppins-Bold',
     marginBottom: 20,
     marginTop: 250,
+    textAlign: 'center',
   },
-
-  
+  centeredTextContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 30,
+  },
   titles: {
     fontSize: 16,
-    fontFamily: "Poppins-Regular",
-    marginBottom: 20,
-    alignItems:'center',
+    fontFamily: 'Poppins-Regular',
+    textAlign: 'center',
   },
   input: {
     width: '90%',
     height: 50,
+    fontFamily: 'Poppins-Regular',
     borderColor: 'white',
-    backgroundColor:'white',
+    backgroundColor: 'white',
     borderWidth: 1,
     borderRadius: 30,
     paddingLeft: 15,
     marginBottom: 15,
     marginTop: 20,
   },
-
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    marginTop: -10,
+    alignSelf: 'flex-start',
+    paddingLeft: '5%',
+    fontFamily: 'Poppins-Regular',
+  },
   customButton: {
     width: 380,
     height: 60,
@@ -130,26 +205,24 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 10,
     marginTop: 70,
-
   },
-
   buttonText: {
     color: 'white',
-    fontSize: 25,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontFamily: 'Poppins-Bold',
   },
-
   alreadyText: {
-    fontSize: 18,
+    fontSize: 16,
     color: 'black',
     marginTop: 10,
+    fontFamily: 'Poppins-Regular',
   },
-
   signInText: {
     color: '#a2e1e8',
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
+    fontSize: 16,
+    marginTop: 10,
   },
-
   circleContainer: {
     position: 'absolute',
     top: 10,
@@ -163,8 +236,26 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 100,
-    backgroundColor: 'rgba(162, 225, 232, 0.5)', 
+    backgroundColor: 'rgba(162, 225, 232, 0.5)',
     position: 'absolute',
+  },
+  popupContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  popup: {
+    width: '80%',
+    padding: 30,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  popupText: {
+    fontSize: 18,
+    fontFamily: 'Poppins-Regular',
+    color: '#32a2a8',
   },
 });
 

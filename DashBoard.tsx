@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 
 const DashBoard = () => {
   const [tasks, setTasks] = useState([
@@ -11,7 +10,7 @@ const DashBoard = () => {
     { id: 5, label: 'Going to travel 6PM', checked: false },
   ]);
 
-  const toggleCheck = ({id}:{id:number}) => {
+  const toggleCheck = (id) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === id ? { ...task, checked: !task.checked } : task
@@ -21,46 +20,33 @@ const DashBoard = () => {
 
   return (
     <View style={styles.container}>
-    
       <View style={styles.topFrame}>
-        <Image 
-          source={require('./assets/Ellipse 3.png')} 
-          style={styles.imageStyle} 
-        />
-        <Text style={styles.welcomeText}>Welcome Jeegar Goyani</Text>
+        <Image source={require('./assets/Ellipse 3.png')} style={styles.imageStyle} />
+        <Text style={styles.welcomeText}>{"Welcome Jeegar Goyani"}</Text>
       </View>
 
-      
       <View style={styles.circleContainer}>
-        <View style={[styles.circle, { top: -5, left: -50 }]} /> 
-        <View style={[styles.circle, { top: -85, left: 45 }]} /> 
+        <View style={[styles.circle, { top: -5, left: -50 }]} />
+        <View style={[styles.circle, { top: -85, left: 45 }]} />
       </View>
 
-    
       <View style={styles.bottomFrame}>
-        <Text style={styles.afternoonText}>Good Afternoon</Text>
-        <Image 
-          source={require('./assets/clock.png')} 
-          style={styles.bottomImageStyle} 
-        />
-        <Text style={styles.afternoonTexts}>Task List</Text>
+        <Text style={styles.afternoonText}>{"Good Afternoon"}</Text>
+        <Image source={require('./assets/clock.png')} style={styles.bottomImageStyle} />
+        <Text style={styles.afternoonTexts}>{"Task List"}</Text>
 
-        
         <View style={styles.additionalFrame}>
-        <Image 
-          source={require('./assets/task_heading.png')}
-          style={styles.bottomImageStyles} 
-        />
+          <Image source={require('./assets/task_heading.png')} style={styles.bottomImageStyles} />
           <ScrollView>
             {tasks.map((task) => (
-              <CheckBox
+              <TouchableOpacity
                 key={task.id}
-                title={task.label}
-                checked={task.checked}
-                onPress={() => toggleCheck({ id: task.id })}
-                containerStyle={styles.checkBoxContainer}
-                textStyle={styles.checkBoxText}
-              />
+                style={styles.checkBoxContainer}
+                onPress={() => toggleCheck(task.id)}
+              >
+                <View style={[styles.checkbox, task.checked && styles.checkedCheckbox]} />
+                <Text style={styles.checkBoxText}>{task.label}</Text>
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
@@ -93,8 +79,8 @@ const styles = StyleSheet.create({
     marginTop: 190,
   },
   welcomeText: {
-    fontSize: 23,
-    fontWeight: 'bold',
+    fontSize: 18,
+    fontFamily: 'Poppins-Bold',
     color: '#FFFFFF',
     textAlign: 'center',
   },
@@ -108,15 +94,15 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   afternoonText: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontFamily: 'Poppins-Bold',
     color: '#333333',
     textAlign: 'right',
     marginBottom: 10,
   },
   afternoonTexts: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontFamily: 'Poppins-Bold',
     color: '#333333',
     textAlign: 'left',
     marginBottom: 10,
@@ -129,7 +115,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   bottomImageStyles: {
-    width:350,
+    width: 350,
   },
   circleContainer: {
     position: 'absolute',
@@ -141,7 +127,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 2,
   },
-   circle: {
+  circle: {
     width: 200,
     height: 200,
     borderRadius: 100,
@@ -156,15 +142,26 @@ const styles = StyleSheet.create({
     height: '45%',
   },
   checkBoxContainer: {
-    backgroundColor: 'transparent',
-    borderWidth: 0,
-    marginVertical: -30, 
-  marginTop:24,
-},
-  
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 12,
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#333',
+    marginRight: 10,
+  },
+  checkedCheckbox: {
+    backgroundColor: '#32a2a8',
+    borderColor: '#32a2a8',
+  },
   checkBoxText: {
     fontSize: 16,
-    fontWeight: '400',
+    fontFamily: 'Poppins-Regular',
+    fontWeight: '200',
     color: '#333',
   },
 });

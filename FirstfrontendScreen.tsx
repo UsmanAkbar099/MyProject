@@ -8,13 +8,13 @@ const FirstScreen = ({ navigation } : {navigation:any}) => {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Gets Things with TODs</Text>
-      <Text style={styles.text}>Lorem ipsum dolor sit amet {'\n'} consectetur. Eget sit nec et {'\n'}euismod. Consequat urna {'\n'}quam felis interdum quisque. {'\n'}Malesuada adipiscing tristique {'\n'}ut eget sed.
+      <Text style={styles.title}>{"Gets Things with TODs"}</Text>
+      <Text style={styles.text}>{"Lorem ipsum dolor sit amet \n consectetur. Eget sit nec et \neuismod. Consequat urna \n quam felis interdum quisque. \n Malesuada adipiscing tristique \n ut eget sed."}
       </Text>
 
       
       <TouchableOpacity style={styles.customButton} onPress={handlePress}>
-        <Text style={styles.buttonText}>Get Started</Text>
+        <Text style={styles.buttonText}>{"Get Started"}</Text>
       </TouchableOpacity>
 
       
@@ -41,13 +41,12 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontSize: 38, 
     marginTop: 250,
     marginBottom: 15,
     textAlign: 'center',
-    fontFamily: "Poppins-Regular",
-    lineHeight: 20.41,
+    fontFamily: "Poppins-ExtraBold",
+    
   },
   text: {
     fontSize: 18,
@@ -72,8 +71,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontSize: 25,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontFamily:'Poppins-Bold'
   },
   circleContainer: {
     position: 'absolute',

@@ -13,6 +13,7 @@ const Stack = createStackNavigator();
 
 const App = () => {
     const [loaded, error] = useFonts({
+        'Poppins-Bold': require('./assets/Fonts/Poppins-ExtraBold.ttf'),
         'Poppins-Regular': require('./assets/Fonts/Poppins-Regular.ttf'),
       });
       useEffect(() => {
