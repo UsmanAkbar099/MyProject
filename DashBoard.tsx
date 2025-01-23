@@ -94,10 +94,10 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   afternoonText: {
-    fontSize: 16,
+    fontSize: 15,
     fontFamily: 'Poppins-Bold',
     color: '#333333',
-    textAlign: 'right',
+    textAlign:'right',
     marginBottom: 10,
   },
   afternoonTexts: {

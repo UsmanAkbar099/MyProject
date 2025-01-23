@@ -23,7 +23,6 @@ const Login = ({ navigation }: { navigation: any }) => {
       setFullNameError('');
     }
 
-    
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailRegex.test(email)) {
       setEmailError('Please enter a valid email address');
@@ -55,7 +54,7 @@ const Login = ({ navigation }: { navigation: any }) => {
         <TextInput
           style={[
             styles.input,
-            fullNameError ? { borderColor: 'red', borderWidth: 1 } : {},
+            fullNameError ? { borderColor: 'red', borderWidth: 2 } : {},
           ]}
           placeholder="Enter Full Name"
           value={fullName}
@@ -77,18 +76,18 @@ const Login = ({ navigation }: { navigation: any }) => {
             setEmail(text);
             setEmailError('');
           }}
-          keyboardType="email-address"
+          
         />
+        
         {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
 
         <Text style={styles.signInTexts}>{"Forget password ?"}</Text>
-
         <TouchableOpacity style={styles.customButton} onPress={handlePress}>
           <Text style={styles.buttonText}>{"Login"}</Text>
         </TouchableOpacity>
 
         <Text style={styles.signUpText}>
-          {"Don't have an account?"}{' '}
+          {"Don't have an account?"}
           <TouchableOpacity onPress={handleSignin}>
             <Text style={styles.signUpLink}>{"Sign Up"}</Text>
           </TouchableOpacity>

@@ -26,10 +26,10 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="FirstfrontendScreen">
-        <Stack.Screen name="FirstfrontendScreen" options={{headerShown:false}} component={FirstfrontendScreen} />
-        <Stack.Screen name="LoginScreen" options={{headerShown:false}} component={LoginScreen} />
-        <Stack.Screen name="Registration" options={{headerShown:false}} component={Registration} />
-        <Stack.Screen name="DashBoard" options={{headerShown:false}} component={DashBoard} />
+        <Stack.Screen name="FirstfrontendScreen" options={{headerShown:false, presentation:"card"}} component={FirstfrontendScreen} />
+        <Stack.Screen name="LoginScreen" options={{headerShown:false, presentation:"transparentModal"}  } component={LoginScreen} />
+        <Stack.Screen name="Registration" options={{headerShown:false, presentation:"modal"}} component={Registration} />
+        <Stack.Screen name="DashBoard" options={{headerShown:false , presentation:"modal"}} component={DashBoard} />
       </Stack.Navigator>
     </NavigationContainer>
   );
