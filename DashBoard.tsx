@@ -10,7 +10,7 @@ const DashBoard = () => {
     { id: 5, label: 'Going to travel 6PM', checked: false },
   ]);
 
-  const toggleCheck = (id) => {
+  const toggleCheck = (id: number) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === id ? { ...task, checked: !task.checked } : task
