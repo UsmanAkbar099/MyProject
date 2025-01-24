@@ -9,7 +9,7 @@ const FirstScreen = ({ navigation } : {navigation:any}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{"Gets Things with TODs"}</Text>
-      <Text style={styles.text}>{"Lorem ipsum dolor sit amet \n consectetur. Eget sit nec et \neuismod. Consequat urna \n quam felis interdum quisque. \n Malesuada adipiscing tristique \n ut eget sed."}
+      <Text style={styles.text}>{"Lorem ipsum dolor sit amet \n consectetur. Eget sit nec et \n euismod. Consequat urna \n quam felis interdum quisque. \n Malesuada adipiscing tristique \n ut eget sed."}
       </Text>
 
       

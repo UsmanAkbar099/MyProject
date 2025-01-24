@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { View,Image, Text, TouchableOpacity, TextInput, StyleSheet, Modal } from 'react-native';
+import { Alert,ActivityIndicator ,View, Image, Text, TouchableOpacity, TextInput, StyleSheet, Modal } from 'react-native';
+import { auth } from './assets/services/Config';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const Registration = ({ navigation }: { navigation: any }) => {
   const [fullName, setFullName] = useState<string>('');
@@ -11,17 +13,18 @@ const Registration = ({ navigation }: { navigation: any }) => {
   const [passwordError, setPasswordError] = useState<string>('');
   const [confirmPasswordError, setConfirmPasswordError] = useState<string>('');
   const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false); 
 
   const handleSignUp = () => {
     navigation.navigate('LoginScreen');
   };
 
-  const handlePress = () => {
+  const handlePress = async () => {
     let valid = true;
 
     const nameRegex = /^[A-Z][a-z]+(?: [A-Z][a-z]+)*$/;
     if (!nameRegex.test(fullName)) {
-      setFullNameError('Please enter a valid Name Style');
+      setFullNameError('Please enter a valid Full Name like Ali Khan');
       valid = false;
     } else {
       setFullNameError('');
@@ -29,7 +32,7 @@ const Registration = ({ navigation }: { navigation: any }) => {
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailRegex.test(email)) {
-      setEmailError('Please enter a valid email address');
+      setEmailError('Please enter a valid email address like abn@domain.com');
       valid = false;
     } else {
       setEmailError('');
@@ -50,11 +53,22 @@ const Registration = ({ navigation }: { navigation: any }) => {
     }
 
     if (valid) {
-      setShowPopup(true);
-      setTimeout(() => {
-        setShowPopup(false);
-        navigation.navigate('LoginScreen');
-      }, 2500); 
+      setLoading(true);
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        setShowPopup(true);
+        setTimeout(() => {
+          setShowPopup(false);
+          navigation.navigate('LoginScreen');
+        }, 2000); 
+      } catch (error) {
+        console.error(error);
+        const errorMessage = (error as Error).message || 'An unknown error occurred.';
+        Alert.alert('Registration Failed', errorMessage);
+      }finally{
+        setLoading(false);
+      }
     }
   };
 
@@ -118,7 +132,11 @@ const Registration = ({ navigation }: { navigation: any }) => {
       {confirmPasswordError ? <Text style={styles.errorText}>{confirmPasswordError}</Text> : null}
 
       <TouchableOpacity style={styles.customButton} onPress={handlePress}>
-        <Text style={styles.buttonText}>{"Register"}</Text>
+        { loading ?(
+          <ActivityIndicator size="large" color="white" />
+                    ) : (<Text style={styles.buttonText}>{"Register"}</Text>
+        )}
+        
       </TouchableOpacity>
 
       <Text style={styles.alreadyText}>
@@ -129,14 +147,17 @@ const Registration = ({ navigation }: { navigation: any }) => {
       </Text>
 
       {showPopup && (
-        <Modal transparent animationType="fade">
+        <Modal transparent animationType="slide">
           <View style={styles.popupContainer}>
             <View style={styles.popup}>
               <Image
                 source={require('./assets/Tick.jpg')}
                 style={styles.imageStyle}
               />
-              <Text style={styles.popupText}>{"Registration Successful!"}</Text>
+              <Text style={styles.popupText}>{"Welcome!"}</Text>
+              <Text style={[styles.popupText, { fontSize: 14 }]}>
+                {"You have successfully registered."}
+              </Text>
             </View>
           </View>
         </Modal>
@@ -154,16 +175,16 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   imageStyle: {
-    width: 100, 
+    width: 100,
     height: 100,
     resizeMode: 'contain',
-    marginBottom: 10, 
+    marginBottom: 10,
   },
   title: {
     fontSize: 25,
     fontFamily: 'Poppins-Bold',
     marginBottom: 20,
-    marginTop: '55%',
+    marginTop: '65%',
     textAlign: 'center',
   },
   centeredTextContainer: {
@@ -172,7 +193,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   titles: {
-    fontSize: 16,
+    fontSize: 17,
     fontFamily: 'Poppins-Regular',
     textAlign: 'center',
   },
@@ -191,7 +212,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     fontSize: 12,
-    marginTop: -10,
+    marginTop: -8,
     alignSelf: 'flex-start',
     paddingLeft: '5%',
     fontFamily: 'Poppins-Regular',
@@ -214,7 +235,8 @@ const styles = StyleSheet.create({
   alreadyText: {
     fontSize: 16,
     color: 'black',
-    marginTop: 10,
+    marginTop: 1,
+    marginBottom: 20,
     fontFamily: 'Poppins-Regular',
   },
   signInText: {
@@ -232,7 +254,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  circle: { 
+  circle: {
     width: '65%',
     height: '70%',
     borderRadius: 100,

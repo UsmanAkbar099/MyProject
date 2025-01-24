@@ -2,11 +2,15 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import FirstfrontendScreen from './FirstfrontendScreen';
+import ReduxCount from './ReduxCount';
 import LoginScreen from './LoginScreen';
 import Registration from './Registration';
 import DashBoard from './DashBoard';
+import Testing from './Testing';
 import { useEffect } from 'react';
 import { useFonts } from 'expo-font';
+import { Provider } from 'react-redux';
+import { store } from './src/store';
 
 const Stack = createStackNavigator();
 
@@ -24,14 +28,18 @@ const App = () => {
         return null;
       }
   return (
+    <Provider store={store}>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="FirstfrontendScreen">
-        <Stack.Screen name="FirstfrontendScreen" options={{headerShown:false, presentation:"card"}} component={FirstfrontendScreen} />
-        <Stack.Screen name="LoginScreen" options={{headerShown:false, presentation:"transparentModal"}  } component={LoginScreen} />
-        <Stack.Screen name="Registration" options={{headerShown:false, presentation:"modal"}} component={Registration} />
-        <Stack.Screen name="DashBoard" options={{headerShown:false , presentation:"modal"}} component={DashBoard} />
+      <Stack.Navigator initialRouteName="Testing">
+        <Stack.Screen name="FirstScreen" component={FirstfrontendScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="ReduxCount" component={ReduxCount} options={{ headerShown: false }} />
+        <Stack.Screen name="Testing" component={Testing} options={{ headerShown: false }} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Registration" component={Registration} options={{ headerShown: false }} />
+        <Stack.Screen name="DashBoard" component={DashBoard} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 };
 

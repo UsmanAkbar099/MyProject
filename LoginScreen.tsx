@@ -1,39 +1,50 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image, Alert, ActivityIndicator } from 'react-native';
+import { auth } from './assets/services/Config';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login = ({ navigation }: { navigation: any }) => {
-  const [fullName, setFullName] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [fullNameError, setFullNameError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
   const [emailError, setEmailError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false); 
 
   const handleSignin = () => {
     navigation.navigate('Registration');
   };
 
-  const handlePress = () => {
+  const handlePress = async () => {
     let valid = true;
-
-    
-    const nameRegex = /^[A-Z][a-z]+(?: [A-Z][a-z]+)*$/;
-    if (!nameRegex.test(fullName)) {
-      setFullNameError('Please enter a valid Name Style');
-      valid = false;
-    } else {
-      setFullNameError('');
-    }
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailRegex.test(email)) {
-      setEmailError('Please enter a valid email address');
+      setEmailError('Please enter a valid email address like abn@domain.com');
       valid = false;
     } else {
       setEmailError('');
     }
 
-    
+    if (password.length < 6) {
+      setPasswordError('Password must be at least 6 characters.');
+      valid = false;
+    } else {
+      setPasswordError('');
+    }
+
     if (valid) {
-      navigation.navigate('DashBoard');
+      setLoading(true); 
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        navigation.navigate('DashBoard');
+      } catch (error) {
+        console.error(error);
+        const errorMessage = 'An error occurred. Due to invalid email or Password';
+        Alert.alert('Login Failed', errorMessage);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -52,38 +63,35 @@ const Login = ({ navigation }: { navigation: any }) => {
 
       <View style={styles.formContainer}>
         <TextInput
-          style={[
-            styles.input,
-            fullNameError ? { borderColor: 'red', borderWidth: 2 } : {},
-          ]}
-          placeholder="Enter Full Name"
-          value={fullName}
-          onChangeText={(text) => {
-            setFullName(text);
-            setFullNameError('');
-          }}
-        />
-        {fullNameError ? <Text style={styles.errorText}>{fullNameError}</Text> : null}
-
-        <TextInput
-          style={[
-            styles.input,
-            emailError ? { borderColor: 'red', borderWidth: 1 } : {},
-          ]}
+          style={[styles.input, emailError ? { borderColor: 'red', borderWidth: 2 } : {}]}
           placeholder="Enter Email"
           value={email}
           onChangeText={(text) => {
             setEmail(text);
             setEmailError('');
           }}
-          
         />
-        
         {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
+
+        <TextInput
+          style={[styles.input, passwordError ? { borderColor: 'red', borderWidth: 2 } : {}]}
+          placeholder="Enter Password"
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text);
+            setPasswordError('');
+          }}
+          secureTextEntry
+        />
+        {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
 
         <Text style={styles.signInTexts}>{"Forget password ?"}</Text>
         <TouchableOpacity style={styles.customButton} onPress={handlePress}>
-          <Text style={styles.buttonText}>{"Login"}</Text>
+          {loading ? (
+            <ActivityIndicator size="large" color="white" />
+          ) : (
+            <Text style={styles.buttonText}>{"Login"}</Text>
+          )}
         </TouchableOpacity>
 
         <Text style={styles.signUpText}>
