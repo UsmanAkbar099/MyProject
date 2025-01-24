@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectCount } from './src/counterSlice';
 import { View, Text, StyleSheet } from 'react-native';
 
-const ReduxExampleScreen = () => {
+const ReduxCountScreen = () => {
   const count = useSelector(selectCount);
 
   return (
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ReduxExampleScreen;
+export default ReduxCountScreen;
