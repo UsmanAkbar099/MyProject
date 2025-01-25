@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Alert,ActivityIndicator ,View, Image, Text, TouchableOpacity, TextInput, StyleSheet, Modal } from 'react-native';
-import { auth } from './assets/services/Config';
+import { auth, db } from './assets/services/Config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { collection, doc, setDoc } from 'firebase/firestore';
 
 const Registration = ({ navigation }: { navigation: any }) => {
   const [fullName, setFullName] = useState<string>('');
@@ -57,6 +58,15 @@ const Registration = ({ navigation }: { navigation: any }) => {
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+
+        
+
+        // Add user data to Firestore
+        await setDoc(doc(collection(db, 'users'), user.uid), {
+          fullName,
+          email,
+          createdAt: new Date().toISOString(),
+        });
         setShowPopup(true);
         setTimeout(() => {
           setShowPopup(false);
